@@ -1,0 +1,45 @@
+{
+  "name": "nabitu-invoicehub",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Abdul",
+    "email": "up2dul@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/up2dul/nabitu.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
+  },
+  "dependencies": {
+    "next": "15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "commitlint": "^19.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": "biome check --write"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
