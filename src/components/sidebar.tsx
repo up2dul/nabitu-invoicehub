@@ -32,7 +32,7 @@ export const Sidebar = () => {
         left: 0,
         zIndex: 2,
         pt: "30px",
-        px: { xs: "10px", md: "38px" },
+        px: { xs: 0, md: "38px" },
       }}
     >
       {/* desktop image */}
@@ -44,12 +44,7 @@ export const Sidebar = () => {
           display: isMdScreen ? "block" : "none",
         }}
       >
-        <Image
-          src="/invoicehub-text-logo.webp"
-          alt="InvoiceHub Logo"
-          objectFit="cover"
-          layout="fill"
-        />
+        <Image src="/invoicehub-text-logo.webp" alt="InvoiceHub Logo" fill />
       </Box>
 
       {/* mobile image */}
@@ -62,12 +57,7 @@ export const Sidebar = () => {
           marginX: "auto",
         }}
       >
-        <Image
-          src="/invoicehub-logo.webp"
-          alt="InvoiceHub Logo"
-          objectFit="cover"
-          layout="fill"
-        />
+        <Image src="/invoicehub-logo.webp" alt="InvoiceHub Logo" fill />
       </Box>
 
       {/* list menu */}
@@ -92,7 +82,9 @@ export const Sidebar = () => {
       >
         <ListItemButton component={Link} href="/invoices/add">
           <ListItemIcon>
-            <Add sx={{ color: addPathnameColor }} />
+            <Add
+              sx={{ color: addPathnameColor, marginX: { xs: "auto", md: 0 } }}
+            />
           </ListItemIcon>
           <ListItemText
             primary={isMdScreen && "Add Invoice"}
@@ -101,7 +93,9 @@ export const Sidebar = () => {
         </ListItemButton>
         <ListItemButton component={Link} href="/invoices/list">
           <ListItemIcon>
-            <FormatListBulleted sx={{ color: listPathnameColor }} />
+            <FormatListBulleted
+              sx={{ color: listPathnameColor, marginX: { xs: "auto", md: 0 } }}
+            />
           </ListItemIcon>
           <ListItemText
             primary={isMdScreen && "My Invoices"}

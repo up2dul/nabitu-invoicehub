@@ -21,12 +21,7 @@ export default function InvoicesLayout({
 
       <Topbar />
 
-      <Box
-        component="section"
-        sx={{ pt: "80px", pl: { xs: "90px", md: "280px" } }}
-      >
-        {children}
-      </Box>
+      <Box sx={{ pt: "80px", pl: { xs: "90px", md: "280px" } }}>{children}</Box>
     </Box>
   );
 }
