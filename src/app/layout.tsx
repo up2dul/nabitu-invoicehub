@@ -1,26 +1,19 @@
+"use client";
 import theme from "@/theme";
 import { ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
-import type { Metadata } from "next";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Open_Sans } from "next/font/google";
 
 const openSans = Open_Sans({
   variable: "--open-sans",
-  weight: ["400", "500", "600"],
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
-
-export const metadata: Metadata = {
-  title: {
-    template: "%s | InvoiceHub",
-    default: "InvoiceHub",
-  },
-  description:
-    "InvoiceHub is a free and open-source invoicing software for small businesses.",
-};
 
 export default function RootLayout({
   children,
@@ -38,7 +31,9 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {children}
+            </LocalizationProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
