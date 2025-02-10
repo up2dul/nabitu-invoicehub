@@ -1,7 +1,11 @@
+"use client";
+import { type InvoiceSchema, invoiceSchema } from "@/lib/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Add } from "@mui/icons-material";
 import {
   Box,
   Button,
+  FormHelperText,
   Grid2 as Grid,
   InputLabel,
   MenuItem,
@@ -10,18 +14,31 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import { Controller, useForm } from "react-hook-form";
 
-export const metadata = {
-  title: "Add Invoice",
-};
+// export const metadata = {
+//   title: "Add Invoice",
+// };
 
 export default function InvoicesAddPage() {
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<InvoiceSchema>({
+    resolver: zodResolver(invoiceSchema),
+  });
+
+  const onSubmit = (data: InvoiceSchema) => {
+    console.log("Submitted:", data);
+  };
+
   return (
     <Box
       component="section"
       sx={{
-        pt: "52px",
-        pb: "315px",
+        py: "52px",
         px: { xs: "10px", sm: "40px", md: "60px", lg: "135px" },
       }}
     >
@@ -43,7 +60,7 @@ export default function InvoicesAddPage() {
           Invoice Form
         </Typography>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container columnSpacing="35px" rowSpacing="18px">
             <Grid size={{ xs: 12, md: 6 }}>
               <InputLabel
@@ -57,6 +74,9 @@ export default function InvoicesAddPage() {
                 placeholder="Enter your invoice name"
                 variant="outlined"
                 sx={{ mt: "12px", width: "100%" }}
+                error={Boolean(errors.name)}
+                helperText={errors.name?.message}
+                {...register("name")}
               />
             </Grid>
 
@@ -72,6 +92,9 @@ export default function InvoicesAddPage() {
                 placeholder="Enter your invoice number"
                 variant="outlined"
                 sx={{ mt: "12px", width: "100%" }}
+                error={Boolean(errors.number)}
+                helperText={errors.number?.message}
+                {...register("number")}
               />
             </Grid>
 
@@ -79,7 +102,26 @@ export default function InvoicesAddPage() {
               <InputLabel sx={{ fontSize: "14px", color: "primary.dark" }}>
                 Due Date <span style={{ color: "#F23030" }}>*</span>
               </InputLabel>
-              <DatePicker sx={{ mt: "12px", width: "100%" }} />
+              <Controller
+                name="dueDate"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    format="DD/MM/YYYY"
+                    sx={{
+                      mt: "12px",
+                      width: "100%",
+                      borderRadius: "4px",
+                      outline: errors.dueDate ? "1px solid red" : "none",
+                    }}
+                    {...field}
+                  />
+                )}
+              />
+
+              <FormHelperText error={Boolean(errors.dueDate)}>
+                {errors.dueDate?.message?.toString()}
+              </FormHelperText>
             </Grid>
 
             <Grid size={{ xs: 12, md: 6 }}>
@@ -94,6 +136,9 @@ export default function InvoicesAddPage() {
                 placeholder="Enter your invoice amount"
                 variant="outlined"
                 sx={{ mt: "12px", width: "100%" }}
+                error={Boolean(errors.amount)}
+                helperText={errors.amount?.message}
+                {...register("amount")}
               />
             </Grid>
 
@@ -104,15 +149,24 @@ export default function InvoicesAddPage() {
               >
                 Status <span style={{ color: "#F23030" }}>*</span>
               </InputLabel>
-              <Select id="invoice-status" sx={{ mt: "12px", width: "100%" }}>
+              <Select
+                id="invoice-status"
+                sx={{ mt: "12px", width: "100%" }}
+                error={Boolean(errors.status)}
+                {...register("status")}
+              >
                 <MenuItem value="paid">Paid</MenuItem>
                 <MenuItem value="unpaid">Unpaid</MenuItem>
                 <MenuItem value="pending">Pending</MenuItem>
               </Select>
+              <FormHelperText error={Boolean(errors.status)}>
+                {errors.status?.message}
+              </FormHelperText>
             </Grid>
 
             <Grid size={12} sx={{ mt: "58px", textAlign: "right" }}>
               <Button
+                type="submit"
                 variant="contained"
                 color="primary"
                 size="large"
