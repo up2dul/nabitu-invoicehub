@@ -18,6 +18,7 @@ import { Controller, useForm } from "react-hook-form";
 export const AddInvoiceForm = () => {
   const {
     control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm<InvoiceSchema>({
@@ -32,49 +33,37 @@ export const AddInvoiceForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container columnSpacing="35px" rowSpacing="18px">
         <Grid size={{ xs: 12, md: 6 }}>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <FormControl error={Boolean(errors.name)} fullWidth>
-                <FormLabel htmlFor="invoice-name" required>
-                  Name
-                </FormLabel>
+          <FormControl error={Boolean(errors.name)} fullWidth>
+            <FormLabel htmlFor="invoice-name" required>
+              Name
+            </FormLabel>
 
-                <TextField
-                  size="small"
-                  id="invoice-name"
-                  placeholder="Enter your invoice name"
-                  error={Boolean(errors.name)}
-                  helperText={errors.name?.message}
-                  {...field}
-                />
-              </FormControl>
-            )}
-          />
+            <TextField
+              size="small"
+              id="invoice-name"
+              placeholder="Enter your invoice name"
+              error={Boolean(errors.name)}
+              helperText={errors.name?.message}
+              {...register("name")}
+            />
+          </FormControl>
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
-          <Controller
-            name="number"
-            control={control}
-            render={({ field }) => (
-              <FormControl error={Boolean(errors.number)} fullWidth>
-                <FormLabel htmlFor="invoice-number" required>
-                  Number
-                </FormLabel>
+          <FormControl error={Boolean(errors.number)} fullWidth>
+            <FormLabel htmlFor="invoice-number" required>
+              Number
+            </FormLabel>
 
-                <TextField
-                  size="small"
-                  id="invoice-number"
-                  placeholder="Enter your invoice number"
-                  error={Boolean(errors.number)}
-                  helperText={errors.number?.message}
-                  {...field}
-                />
-              </FormControl>
-            )}
-          />
+            <TextField
+              size="small"
+              id="invoice-number"
+              placeholder="Enter your invoice number"
+              error={Boolean(errors.number)}
+              helperText={errors.number?.message}
+              {...register("number")}
+            />
+          </FormControl>
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
@@ -105,26 +94,20 @@ export const AddInvoiceForm = () => {
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
-          <Controller
-            name="amount"
-            control={control}
-            render={({ field }) => (
-              <FormControl error={Boolean(errors.amount)} fullWidth>
-                <FormLabel htmlFor="invoice-amount" required>
-                  Amount
-                </FormLabel>
+          <FormControl error={Boolean(errors.amount)} fullWidth>
+            <FormLabel htmlFor="invoice-amount" required>
+              Amount
+            </FormLabel>
 
-                <TextField
-                  size="small"
-                  id="invoice-amount"
-                  placeholder="Enter your invoice amount"
-                  error={Boolean(errors.amount)}
-                  helperText={errors.amount?.message}
-                  {...field}
-                />
-              </FormControl>
-            )}
-          />
+            <TextField
+              size="small"
+              id="invoice-amount"
+              placeholder="Enter your invoice amount"
+              error={Boolean(errors.amount)}
+              helperText={errors.amount?.message}
+              {...register("amount")}
+            />
+          </FormControl>
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
