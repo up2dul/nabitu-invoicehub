@@ -8,7 +8,7 @@ import {
 
 type SnackbarProps = {
   type: "success" | "error";
-  isSnackbarOpen: boolean;
+  isOpen: boolean;
   handleClose:
     | ((
         event?: React.SyntheticEvent | Event,
@@ -19,12 +19,12 @@ type SnackbarProps = {
 
 export const InvoiceSnackbar = ({
   type,
-  isSnackbarOpen,
+  isOpen,
   handleClose,
 }: SnackbarProps) => {
   return (
     <Snackbar
-      open={isSnackbarOpen}
+      open={isOpen}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       autoHideDuration={6000}
       onClose={handleClose}

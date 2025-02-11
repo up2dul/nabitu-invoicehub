@@ -188,12 +188,12 @@ export const AddInvoiceForm = () => {
 
       <InvoiceSnackbar
         type="success"
-        isSnackbarOpen={isSuccessSnackbarOpen}
+        isOpen={isSuccessSnackbarOpen}
         handleClose={handleClose}
       />
       <InvoiceSnackbar
         type="error"
-        isSnackbarOpen={isErrorSnackbarOpen}
+        isOpen={isErrorSnackbarOpen}
         handleClose={handleClose}
       />
     </>
