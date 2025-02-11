@@ -7,6 +7,7 @@ import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Open_Sans } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 const openSans = Open_Sans({
   variable: "--open-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="InvoiceHub" />
       </head>
       <body className={openSans.variable}>
+        <NextTopLoader color="#3C50E0" showSpinner />
         <InitColorSchemeScript attribute="class" />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
