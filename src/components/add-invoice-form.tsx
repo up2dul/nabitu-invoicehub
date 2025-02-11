@@ -34,7 +34,6 @@ export const AddInvoiceForm = () => {
   const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
 
   const onSubmit = (data: InvoiceSchema) => {
-    console.log("Submitted:", data);
     addInvoice(data)
       .then(() => {
         setIsSuccessSnackbarOpen(true);
