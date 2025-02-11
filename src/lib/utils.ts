@@ -12,3 +12,16 @@ import { z } from "zod";
 export function zodRequiredString(message = "Required!") {
   return z.string({ required_error: message }).min(1, { message });
 }
+
+/**
+ * Generates a new invoice number.
+ *
+ * This function creates a unique invoice number by prepending 'INV' to the current timestamp,
+ * ensuring that each generated invoice number is distinct.
+ *
+ * @returns {string} The generated invoice number in the format 'INV<timestamp>'.
+ */
+export function generateInvoiceNumber(): string {
+  const newInvoiceNumber = (+new Date()).toString();
+  return `INV${newInvoiceNumber}`;
+}

@@ -1,6 +1,8 @@
 "use client";
+import { InvoiceSnackbar } from "@/components/invoice-snackbar";
 import { useInvoices } from "@/hooks/use-invoices";
 import { type InvoiceSchema, invoiceSchema } from "@/lib/schemas";
+import { generateInvoiceNumber } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Add } from "@mui/icons-material";
 import {
@@ -17,7 +19,6 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { InvoiceSnackbar } from "./invoice-snackbar";
 
 export const AddInvoiceForm = () => {
   const { isLoading, addInvoice } = useInvoices();
@@ -87,9 +88,11 @@ export const AddInvoiceForm = () => {
               <TextField
                 size="small"
                 id="invoice-number"
-                placeholder="Enter your invoice number"
+                placeholder="Auto Generated"
                 error={Boolean(errors.number)}
                 helperText={errors.number?.message}
+                value={generateInvoiceNumber()}
+                disabled
                 {...register("number")}
               />
             </FormControl>
