@@ -19,6 +19,9 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { NumericFormat } from "react-number-format";
+
+const invoiceNumber = generateInvoiceNumber();
 
 export const AddInvoiceForm = () => {
   const { isLoading, addInvoice } = useInvoices();
@@ -91,7 +94,7 @@ export const AddInvoiceForm = () => {
                 placeholder="Auto Generated"
                 error={Boolean(errors.number)}
                 helperText={errors.number?.message}
-                value={generateInvoiceNumber()}
+                value={invoiceNumber}
                 disabled
                 {...register("number")}
               />
@@ -126,20 +129,30 @@ export const AddInvoiceForm = () => {
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormControl error={Boolean(errors.amount)} fullWidth>
-              <FormLabel htmlFor="invoice-amount" required>
-                Amount
-              </FormLabel>
+            <Controller
+              name="amount"
+              control={control}
+              render={({ field }) => (
+                <FormControl error={Boolean(errors.amount)} fullWidth>
+                  <FormLabel htmlFor="invoice-amount" required>
+                    Amount
+                  </FormLabel>
 
-              <TextField
-                size="small"
-                id="invoice-amount"
-                placeholder="Enter your invoice amount"
-                error={Boolean(errors.amount)}
-                helperText={errors.amount?.message}
-                {...register("amount")}
-              />
-            </FormControl>
+                  <NumericFormat
+                    allowNegative={false}
+                    thousandSeparator
+                    customInput={TextField}
+                    prefix="Rp. "
+                    size="small"
+                    id="invoice-amount"
+                    placeholder="Enter your invoice amount"
+                    error={Boolean(errors.amount)}
+                    helperText={errors.amount?.message}
+                    {...field}
+                  />
+                </FormControl>
+              )}
+            />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
