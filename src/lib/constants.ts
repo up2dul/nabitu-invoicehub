@@ -1,4 +1,4 @@
-export const invoiceSnackbarInfo = {
+export const INVOICE_SNACKBAR_MSG = {
   success: {
     title: "Invoice added successfully!",
     description:

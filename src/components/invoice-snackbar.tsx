@@ -1,4 +1,4 @@
-import { invoiceSnackbarInfo } from "@/lib/constants";
+import { INVOICE_SNACKBAR_MSG } from "@/lib/constants";
 import {
   Alert,
   AlertTitle,
@@ -31,9 +31,9 @@ export const InvoiceSnackbar = ({
     >
       <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
         <AlertTitle sx={{ fontWeight: 700 }}>
-          {invoiceSnackbarInfo[type].title}
+          {INVOICE_SNACKBAR_MSG[type].title}
         </AlertTitle>
-        {invoiceSnackbarInfo[type].description}
+        {INVOICE_SNACKBAR_MSG[type].description}
       </Alert>
     </Snackbar>
   );
