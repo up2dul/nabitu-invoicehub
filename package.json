@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "pages:build": "next-on-pages",
     "start": "next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@commitlint/config-conventional": "^19.7.1",
     "@types/node": "^20",
     "@types/react": "^19",
