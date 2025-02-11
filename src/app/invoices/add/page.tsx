@@ -28,7 +28,14 @@ export default function InvoicesAddPage() {
           boxShadow: "0 8px 13px -3px rgba(0, 0, 0, 0.07)",
         }}
       >
-        <Typography sx={{ mb: "40px", fontWeight: 600 }}>
+        <Typography
+          sx={{
+            mb: "40px",
+            fontWeight: 600,
+            borderBottom: "1px solid #E2E8F0",
+            pb: "15px",
+          }}
+        >
           Invoice Form
         </Typography>
 
