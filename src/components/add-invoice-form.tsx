@@ -21,10 +21,9 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
-const invoiceNumber = generateInvoiceNumber();
-
 export const AddInvoiceForm = () => {
   const { isLoading, addInvoice } = useInvoices();
+  const [invoiceNumber, setInvoiceNumber] = useState(generateInvoiceNumber());
   const {
     reset,
     control,
@@ -42,6 +41,7 @@ export const AddInvoiceForm = () => {
       .then(() => {
         setIsSuccessSnackbarOpen(true);
         reset();
+        setInvoiceNumber(generateInvoiceNumber());
       })
       .catch(error => {
         setIsErrorSnackbarOpen(true);
