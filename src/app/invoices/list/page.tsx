@@ -25,7 +25,7 @@ export default async function InvoicesListPage({
         px: { xs: "10px", sm: "40px", md: "60px", lg: "135px" },
       }}
     >
-      <Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           My Invoices
         </Typography>
