@@ -1,4 +1,4 @@
-import { AddInvoiceForm } from "@/components/add-invoice-form";
+import { AddInvoiceForm } from "@/components/section/add-invoice-form";
 import { Box, Typography } from "@mui/material";
 
 export const metadata = {

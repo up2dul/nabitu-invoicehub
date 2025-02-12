@@ -1,4 +1,4 @@
-import InvoicesTable from "@/components/invoices-table";
+import InvoicesTable from "@/components/section/invoices-table";
 import { Box, Typography } from "@mui/material";
 
 export const metadata = {

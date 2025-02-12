@@ -1,5 +1,5 @@
 "use client";
-import { InvoiceSnackbar } from "@/components/invoice-snackbar";
+import { InvoiceSnackbar } from "@/components/ui/invoice-snackbar";
 import { useInvoices } from "@/hooks/use-invoices";
 import { type InvoiceSchema, invoiceSchema } from "@/lib/schemas";
 import { generateInvoiceNumber } from "@/lib/utils";

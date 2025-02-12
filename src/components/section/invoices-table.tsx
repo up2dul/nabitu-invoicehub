@@ -13,7 +13,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { StatusChip } from "./status-chip";
+import { StatusChip } from "../ui/status-chip";
 
 export default function InvoicesTable() {
   const { invoices } = useInvoices();
