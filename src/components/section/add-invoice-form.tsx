@@ -15,6 +15,7 @@ import {
   Select,
   type SnackbarCloseReason,
   TextField,
+  Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
@@ -142,12 +143,23 @@ export const AddInvoiceForm = () => {
                     allowNegative={false}
                     thousandSeparator
                     customInput={TextField}
-                    prefix="Rp. "
                     size="small"
                     id="invoice-amount"
                     placeholder="Enter your invoice amount"
                     error={Boolean(errors.amount)}
                     helperText={errors.amount?.message}
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <Typography sx={{ color: "#64748B" }}>Rp</Typography>
+                        ),
+                      },
+                    }}
+                    sx={{
+                      "& .MuiInputBase-input": {
+                        paddingLeft: "0.8rem",
+                      },
+                    }}
                     {...field}
                   />
                 </FormControl>
