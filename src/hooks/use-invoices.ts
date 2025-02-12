@@ -1,6 +1,6 @@
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import type { InvoiceSchema } from "@/lib/schemas";
 import { useEffect, useState } from "react";
-import { useLocalStorage } from "./use-local-storage";
 
 type UseInvoicesType = Partial<{
   search: string;
