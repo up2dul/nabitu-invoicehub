@@ -25,12 +25,18 @@ export default async function InvoicesListPage({
         px: { xs: "10px", sm: "40px", md: "60px", lg: "135px" },
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "space-between",
+          flexDirection: { xs: "column", lg: "row" },
+        }}
+      >
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           My Invoices
         </Typography>
 
-        {/* TODO: search and status filter */}
         <InvoicesFilter />
       </Box>
 
