@@ -25,7 +25,7 @@ export default function InvoicesListPage() {
       <Box
         sx={{
           mt: "38px",
-          p: "15px 26px",
+          p: "30px",
           bgcolor: "white",
           border: "1px solid #E2E8F0",
           borderRadius: "2px",

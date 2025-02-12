@@ -11,6 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { StatusChip } from "./status-chip";
 
@@ -36,7 +37,14 @@ export default function InvoicesTable() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {invoice.name}
+                <Typography>{invoice.name}</Typography>
+                <Typography
+                  variant="caption"
+                  color="#64748B"
+                  sx={{ fontWeight: 600 }}
+                >
+                  {invoice.number}
+                </Typography>
               </TableCell>
               <TableCell align="center">
                 {dateToReadable(invoice.dueDate)}
