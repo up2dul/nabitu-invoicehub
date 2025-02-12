@@ -1,3 +1,4 @@
+import { InvoicesFilter } from "@/components/section/invoices-filter";
 import InvoicesTable from "@/components/section/invoices-table";
 import { Box, Typography } from "@mui/material";
 
@@ -5,7 +6,17 @@ export const metadata = {
   title: "Invoices List",
 };
 
-export default function InvoicesListPage() {
+type InvoicesListPageProps = {
+  searchParams: {
+    search: string;
+    status: string;
+  };
+};
+
+export default async function InvoicesListPage({
+  searchParams,
+}: InvoicesListPageProps) {
+  const params = await searchParams;
   return (
     <Box
       component="section"
@@ -20,6 +31,7 @@ export default function InvoicesListPage() {
         </Typography>
 
         {/* TODO: search and status filter */}
+        <InvoicesFilter />
       </Box>
 
       <Box
@@ -32,7 +44,7 @@ export default function InvoicesListPage() {
           boxShadow: "0 8px 13px -3px rgba(0, 0, 0, 0.07)",
         }}
       >
-        <InvoicesTable />
+        <InvoicesTable searchParams={params} />
       </Box>
     </Box>
   );

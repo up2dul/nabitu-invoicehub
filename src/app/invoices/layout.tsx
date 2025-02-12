@@ -2,6 +2,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Topbar } from "@/components/layout/topbar";
 import { Box } from "@mui/material";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +32,9 @@ export default function InvoicesLayout({
 
       <Topbar />
 
-      <Box sx={{ pt: "80px", pl: { xs: "90px", md: "280px" } }}>{children}</Box>
+      <Box sx={{ pt: "80px", pl: { xs: "90px", md: "280px" } }}>
+        <Suspense fallback={null}>{children}</Suspense>
+      </Box>
     </Box>
   );
 }

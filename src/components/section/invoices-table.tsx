@@ -1,4 +1,5 @@
 "use client";
+import { StatusChip } from "@/components/ui/status-chip";
 import { useInvoices } from "@/hooks/use-invoices";
 import { dateToReadable } from "@/lib/utils";
 import { Reorder } from "@mui/icons-material";
@@ -13,10 +14,16 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { StatusChip } from "../ui/status-chip";
 
-export default function InvoicesTable() {
-  const { invoices } = useInvoices();
+type InvoicesTableProps = {
+  searchParams: {
+    search: string;
+    status: string;
+  };
+};
+
+export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
+  const { invoices } = useInvoices(searchParams);
 
   return (
     <TableContainer component={Paper}>
