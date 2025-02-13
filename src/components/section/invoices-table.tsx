@@ -1,10 +1,9 @@
 "use client";
 import { StatusChip } from "@/components/ui/status-chip";
+import { TableMenu } from "@/components/ui/table-menu";
 import { useInvoices } from "@/hooks/use-invoices";
 import { dateToReadable } from "@/lib/utils";
-import { Reorder } from "@mui/icons-material";
 import {
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,6 +13,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useRouter } from "nextjs-toploader/app";
 
 type InvoicesTableProps = {
   searchParams: {
@@ -23,7 +23,8 @@ type InvoicesTableProps = {
 };
 
 export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
-  const { invoices } = useInvoices(searchParams);
+  const router = useRouter();
+  const { invoices, deleteInvoice } = useInvoices(searchParams);
 
   return (
     <TableContainer component={Paper}>
@@ -61,9 +62,12 @@ export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
               </TableCell>
               <TableCell align="center">{invoice.amount}</TableCell>
               <TableCell align="center">
-                <IconButton aria-label="actions">
-                  <Reorder />
-                </IconButton>
+                <TableMenu
+                  onUpdate={() =>
+                    router.push(`/invoices/update/${invoice.number}`)
+                  }
+                  onDelete={() => deleteInvoice(invoice.number)}
+                />
               </TableCell>
             </TableRow>
           ))}

@@ -1,4 +1,4 @@
-import { AddInvoiceForm } from "@/components/section/add-invoice-form";
+import { InvoiceForm } from "@/components/section/invoice-form";
 import { Box, Typography } from "@mui/material";
 
 export const metadata = {
@@ -39,7 +39,7 @@ export default function InvoicesAddPage() {
           Invoice Form
         </Typography>
 
-        <AddInvoiceForm />
+        <InvoiceForm mode="add" />
       </Box>
     </Box>
   );
