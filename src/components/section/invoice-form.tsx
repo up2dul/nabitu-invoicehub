@@ -1,5 +1,5 @@
 "use client";
-import { InvoiceSnackbar } from "@/components/invoice-snackbar";
+import { InvoiceSnackbar } from "@/components/ui/invoice-snackbar";
 import { useInvoices } from "@/hooks/use-invoices";
 import { type InvoiceSchema, invoiceSchema } from "@/lib/schemas";
 import { generateInvoiceNumber } from "@/lib/utils";
@@ -15,14 +15,25 @@ import {
   Select,
   type SnackbarCloseReason,
   TextField,
+  Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
-export const AddInvoiceForm = () => {
-  const { isLoading, addInvoice } = useInvoices();
+type InvoiceFormProps =
+  | {
+      mode: "add";
+    }
+  | {
+      mode: "update";
+      invoiceNumber: string;
+    };
+
+export const InvoiceForm = (props: InvoiceFormProps) => {
+  const { mode } = props;
+  const { isLoading, addInvoice, updateInvoice } = useInvoices();
   const [invoiceNumber, setInvoiceNumber] = useState(generateInvoiceNumber());
   const {
     reset,
@@ -37,16 +48,29 @@ export const AddInvoiceForm = () => {
   const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
 
   const onSubmit = (data: InvoiceSchema) => {
-    addInvoice(data)
-      .then(() => {
-        setIsSuccessSnackbarOpen(true);
-        reset();
-        setInvoiceNumber(generateInvoiceNumber());
-      })
-      .catch(error => {
-        setIsErrorSnackbarOpen(true);
-        console.error("Error adding invoice:", error);
-      });
+    if (mode === "add") {
+      addInvoice(data)
+        .then(() => {
+          setIsSuccessSnackbarOpen(true);
+          reset();
+          setInvoiceNumber(generateInvoiceNumber());
+        })
+        .catch(error => {
+          setIsErrorSnackbarOpen(true);
+          console.error("Error adding invoice:", error);
+        });
+    } else {
+      updateInvoice(data)
+        .then(() => {
+          setIsSuccessSnackbarOpen(true);
+          reset();
+          setInvoiceNumber(generateInvoiceNumber());
+        })
+        .catch(error => {
+          setIsErrorSnackbarOpen(true);
+          console.error("Error updating invoice:", error);
+        });
+    }
   };
 
   const handleClose = (
@@ -142,12 +166,23 @@ export const AddInvoiceForm = () => {
                     allowNegative={false}
                     thousandSeparator
                     customInput={TextField}
-                    prefix="Rp. "
                     size="small"
                     id="invoice-amount"
                     placeholder="Enter your invoice amount"
                     error={Boolean(errors.amount)}
                     helperText={errors.amount?.message}
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <Typography sx={{ color: "#64748B" }}>Rp</Typography>
+                        ),
+                      },
+                    }}
+                    sx={{
+                      "& .MuiInputBase-input": {
+                        paddingLeft: "0.8rem",
+                      },
+                    }}
                     {...field}
                   />
                 </FormControl>
