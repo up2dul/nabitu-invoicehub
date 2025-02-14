@@ -2,6 +2,8 @@ import { InvoicesFilter } from "@/components/section/invoices-filter";
 import InvoicesTable from "@/components/section/invoices-table";
 import { Box, Typography } from "@mui/material";
 
+export const runtime = "edge";
+
 export const metadata = {
   title: "Invoices List",
 };
