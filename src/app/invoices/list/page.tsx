@@ -7,10 +7,10 @@ export const metadata = {
 };
 
 type InvoicesListPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     search: string;
     status: string;
-  };
+  }>;
 };
 
 export default async function InvoicesListPage({
