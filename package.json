@@ -11,21 +11,22 @@
     "url": "https://github.com/up2dul/nabitu-invoicehub.git"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "pages:build": "next-on-pages",
-    "start": "next start",
+    "dev": "dotenvx run -- next dev",
+    "build": "dotenvx run -- next build",
+    "pages:build": "dotenvx run -- next-on-pages",
+    "start": "dotenvx run -- next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check --write .",
     "prepare": "husky",
     "commitlint": "commitlint --edit",
-    "db:generate": "drizzle-kit generate",
-    "db:pull": "drizzle-kit pull",
-    "db:push": "drizzle-kit push",
-    "db:migrate": "drizzle-kit migrate"
+    "db:generate": "dotenvx run -- drizzle-kit generate",
+    "db:pull": "dotenvx run -- drizzle-kit pull",
+    "db:push": "dotenvx run -- drizzle-kit push",
+    "db:migrate": "dotenvx run -- drizzle-kit migrate"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.36.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^3.10.0",
@@ -34,7 +35,6 @@
     "@mui/material-nextjs": "^6.4.3",
     "@mui/x-date-pickers": "^7.26.0",
     "dayjs": "^1.11.13",
-    "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.3",
     "next": "15.1.6",
     "nextjs-toploader": "^3.7.15",
