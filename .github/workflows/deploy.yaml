@@ -1,43 +1,20 @@
-name: 🌎 Build and Deploy
-on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '.gitignore'
-      - 'README.md'
-      - 'biome.json'
-      - 'commitlint.config.ts'
+name: 🌍 Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+# temporary run on every push
+on: [push]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    strategy:
-      matrix:
-        node-version: [20]
+  build:
+    runs-on: ubuntu-22.04
     steps:
-      - name: 🛎️ Checkout
-        uses: actions/checkout@v4
-      - name: 📦 Setting up pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.13.15 # This is the action
         with:
-          version: 9
-      - name: 🛠️ Setting up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: 🏗️ Install dependencies and build
-        run: |
-          pnpm install
-          pnpm run pages:build
-      - name: 🌎 Deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: pages deploy .vercel/output/static --project-name=nabitu-invoicehub
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "invoicehub"
+          heroku_email: "up2dul@gmail.com"
+          usedocker: true
