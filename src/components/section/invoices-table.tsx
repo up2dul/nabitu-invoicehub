@@ -3,6 +3,7 @@ import { StatusChip } from "@/components/ui/status-chip";
 import { TableMenu } from "@/components/ui/table-menu";
 import type { InvoiceSchema } from "@/lib/schemas";
 import { dateToReadable } from "@/lib/utils";
+import { deleteInvoice } from "@/server/actions";
 import {
   Paper,
   Table,
@@ -35,6 +36,17 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
+          {invoices.length === 0 && (
+            <TableRow
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row" colSpan={5}>
+                <Typography sx={{ textAlign: "center" }}>
+                  There is no invoices found
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )}
           {invoices.map(invoice => (
             <TableRow
               key={invoice.id}
@@ -62,7 +74,7 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
                   onUpdate={() =>
                     router.push(`/invoices/update/${invoice.number}`)
                   }
-                  onDelete={() => console.log(invoice.number)}
+                  onDelete={() => deleteInvoice(invoice.number)}
                 />
               </TableCell>
             </TableRow>

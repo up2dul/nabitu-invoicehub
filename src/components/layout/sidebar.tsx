@@ -25,7 +25,7 @@ export const Sidebar = () => {
     <Box
       sx={{
         bgcolor: "primary.dark",
-        width: { xs: "90px", md: "280px" },
+        width: { xs: "80px", md: "280px" },
         height: "100vh",
         position: "fixed",
         top: 0,

@@ -18,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import { useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
@@ -28,12 +29,14 @@ type InvoiceFormProps =
     }
   | {
       mode: "update";
-      invoiceNumber: string;
+      selectedInvoice: InvoiceSchema;
     };
 
 export const InvoiceForm = (props: InvoiceFormProps) => {
   const { mode } = props;
-  const [invoiceNumber, setInvoiceNumber] = useState(generateInvoiceNumber());
+  const [invoiceNumber, setInvoiceNumber] = useState(
+    mode === "add" ? generateInvoiceNumber() : props.selectedInvoice.number,
+  );
   const {
     reset,
     control,
@@ -42,7 +45,15 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
     formState: { errors },
   } = useForm<InvoiceSchema>({
     resolver: zodResolver(invoiceSchema),
+    defaultValues:
+      mode === "update"
+        ? {
+            ...props.selectedInvoice,
+            dueDate: dayjs(props.selectedInvoice.dueDate),
+          }
+        : undefined,
   });
+  console.log("props", props);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
   const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
