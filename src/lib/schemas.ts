@@ -3,6 +3,7 @@ import { z } from "zod";
 import { zodRequiredString } from "./utils";
 
 export const invoiceSchema = z.object({
+  id: z.number().optional(),
   name: zodRequiredString("Name is required!"),
   number: zodRequiredString("Number is required!"),
   dueDate: z

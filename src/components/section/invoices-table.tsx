@@ -1,7 +1,7 @@
 "use client";
 import { StatusChip } from "@/components/ui/status-chip";
 import { TableMenu } from "@/components/ui/table-menu";
-import { useInvoices } from "@/hooks/use-invoices";
+import type { InvoiceSchema } from "@/lib/schemas";
 import { dateToReadable } from "@/lib/utils";
 import {
   Paper,
@@ -16,15 +16,11 @@ import {
 import { useRouter } from "nextjs-toploader/app";
 
 type InvoicesTableProps = {
-  searchParams: {
-    search: string;
-    status: string;
-  };
+  invoices: InvoiceSchema[];
 };
 
-export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
+export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
   const router = useRouter();
-  const { invoices, deleteInvoice } = useInvoices(searchParams);
 
   return (
     <TableContainer component={Paper}>
@@ -41,7 +37,7 @@ export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
         <TableBody>
           {invoices.map(invoice => (
             <TableRow
-              key={invoice.number}
+              key={invoice.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -60,13 +56,13 @@ export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
               <TableCell align="center">
                 <StatusChip status={invoice.status} />
               </TableCell>
-              <TableCell align="center">{invoice.amount}</TableCell>
+              <TableCell align="center">Rp {invoice.amount}</TableCell>
               <TableCell align="center">
                 <TableMenu
                   onUpdate={() =>
                     router.push(`/invoices/update/${invoice.number}`)
                   }
-                  onDelete={() => deleteInvoice(invoice.number)}
+                  onDelete={() => console.log(invoice.number)}
                 />
               </TableCell>
             </TableRow>
@@ -75,4 +71,4 @@ export default function InvoicesTable({ searchParams }: InvoicesTableProps) {
       </Table>
     </TableContainer>
   );
-}
+};

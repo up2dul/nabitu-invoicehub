@@ -1,3 +1,4 @@
+"use client";
 import { INVOICE_SNACKBAR_MSG } from "@/lib/constants";
 import {
   Alert,
@@ -5,6 +6,7 @@ import {
   Snackbar,
   type SnackbarCloseReason,
 } from "@mui/material";
+import { usePathname } from "next/navigation";
 
 type SnackbarProps = {
   type: "success" | "error";
@@ -22,6 +24,10 @@ export const InvoiceSnackbar = ({
   isOpen,
   handleClose,
 }: SnackbarProps) => {
+  const pathname = usePathname();
+  const isAddInvoicePage = pathname === "/invoices/add";
+  const invoiceMode = isAddInvoicePage ? "add" : "update";
+
   return (
     <Snackbar
       open={isOpen}
@@ -31,9 +37,9 @@ export const InvoiceSnackbar = ({
     >
       <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
         <AlertTitle sx={{ fontWeight: 700 }}>
-          {INVOICE_SNACKBAR_MSG[type].title}
+          {INVOICE_SNACKBAR_MSG[invoiceMode][type].title}
         </AlertTitle>
-        {INVOICE_SNACKBAR_MSG[type].description}
+        {INVOICE_SNACKBAR_MSG[invoiceMode][type].description}
       </Alert>
     </Snackbar>
   );
