@@ -13,7 +13,6 @@
   "scripts": {
     "dev": "dotenvx run -- next dev",
     "build": "dotenvx run -- next build",
-    "pages:build": "dotenvx run -- next-on-pages",
     "start": "dotenvx run -- next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
@@ -47,7 +46,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@cloudflare/next-on-pages": "^1.13.7",
     "@commitlint/config-conventional": "^19.7.1",
     "@types/node": "^20",
     "@types/pg": "^8.11.11",
