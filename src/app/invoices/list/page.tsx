@@ -1,8 +1,7 @@
 import { InvoicesFilter } from "@/components/section/invoices-filter";
-import InvoicesTable from "@/components/section/invoices-table";
+import { InvoicesTable } from "@/components/section/invoices-table";
+import { getInvoices } from "@/server/actions";
 import { Box, Typography } from "@mui/material";
-
-export const runtime = "edge";
 
 export const metadata = {
   title: "Invoices List",
@@ -19,6 +18,11 @@ export default async function InvoicesListPage({
   searchParams,
 }: InvoicesListPageProps) {
   const params = await searchParams;
+  const invoicesList = await getInvoices({
+    search: params.search,
+    status: params.status,
+  });
+
   return (
     <Box
       component="section"
@@ -52,7 +56,7 @@ export default async function InvoicesListPage({
           boxShadow: "0 8px 13px -3px rgba(0, 0, 0, 0.07)",
         }}
       >
-        <InvoicesTable searchParams={params} />
+        <InvoicesTable invoices={invoicesList} />
       </Box>
     </Box>
   );
