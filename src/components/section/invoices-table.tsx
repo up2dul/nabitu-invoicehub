@@ -36,6 +36,17 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
+          {invoices.length === 0 && (
+            <TableRow
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row" colSpan={5}>
+                <Typography sx={{ textAlign: "center" }}>
+                  There is no invoices found
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )}
           {invoices.map(invoice => (
             <TableRow
               key={invoice.id}
