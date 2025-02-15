@@ -28,7 +28,7 @@ jobs:
           tags: up2dul/invoicehub:latest
   deploy:
     runs-on: ubuntu-latest
-    needs: docker
+    needs: build_and_push
     steps:
       - name: Trigger Render Deploy
         env:
