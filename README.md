@@ -10,10 +10,11 @@
   - [Table of Contents](#table-of-contents)
   - [Technologies](#technologies)
   - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Clone the Repository](#clone-the-repository)
-    - [Instalation](#instalation)
-    - [Database Setup](#database-setup)
+    - [1. Prerequisites](#1-prerequisites)
+    - [2. Clone the Repository](#2-clone-the-repository)
+    - [3. Instalation](#3-instalation)
+    - [4. Environment Setup](#4-environment-setup)
+    - [5. Run the database migration](#5-run-the-database-migration)
   - [Usage](#usage)
     - [Start the development server](#start-the-development-server)
 
@@ -35,13 +36,13 @@ Also some additional development tools:
 
 ## Getting Started
 
-### Prerequisites
+### 1. Prerequisites
 
 - [Node.js](https://nodejs.org) `>=18.x`
 - [PostgreSQL](https://postgresql.org) `>=17.x`
 - [pnpm](https://pnpm.io) `>=9.x` (recommended as the package manager)
 
-### Clone the Repository
+### 2. Clone the Repository
 
 ```bash
 git clone https://github.com/up2dul/nabitu-invoicehub.git
@@ -50,7 +51,7 @@ git clone https://github.com/up2dul/nabitu-invoicehub.git
 git clone git@github.com:up2dul/nabitu-invoicehub.git
 ```
 
-### Instalation
+### 3. Instalation
 
 Go to the project directory and install dependencies
 ```bash
@@ -61,14 +62,15 @@ cd nabitu-invoicehub
 pnpm install
 ```
 
-### Database Setup
+### 4. Environment Setup
 
 Copy the `.env.example` file to `.env` and fill in the `DB_URL` values with your own.
 ```bash
 cp .env.example .env
 ```
 
-Run the database migration
+### 5. Run the database migration
+
 ```bash
 pnpm db:migrate
 ```
