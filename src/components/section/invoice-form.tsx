@@ -53,7 +53,6 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
           }
         : undefined,
   });
-  console.log("props", props);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
   const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
