@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+        - '.env.example'
+        - '.gitignore'
+        - '.husky/**'
+        - 'biome.json'
+        - 'commitlint.config.ts'
+        - 'LICENSE'
+        - 'README.md'
 
 jobs:
   build_and_push:
