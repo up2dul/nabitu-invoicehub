@@ -70,11 +70,7 @@
     "public.status": {
       "name": "status",
       "schema": "public",
-      "values": [
-        "paid",
-        "unpaid",
-        "pending"
-      ]
+      "values": ["paid", "unpaid", "pending"]
     }
   },
   "schemas": {},

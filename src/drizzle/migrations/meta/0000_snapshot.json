@@ -69,11 +69,7 @@
   "enums": {
     "public.status": {
       "name": "status",
-      "values": [
-        "paid",
-        "unpaid",
-        "pending"
-      ],
+      "values": ["paid", "unpaid", "pending"],
       "schema": "public"
     }
   },
