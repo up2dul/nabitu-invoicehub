@@ -81,8 +81,10 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
 
     if (success) {
       setIsSuccessSnackbarOpen(true);
-      reset();
-      setInvoiceNumber(generateInvoiceNumber());
+      if (mode === "add") {
+        reset();
+        setInvoiceNumber(generateInvoiceNumber());
+      }
       setIsLoading(false);
     }
   };
