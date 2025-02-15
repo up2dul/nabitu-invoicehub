@@ -69,3 +69,20 @@ export function getStatusColor(status: InvoiceSchema["status"]) {
       };
   }
 }
+
+/**
+ * Transforms a ZodError instance into a simplified array of error objects.
+ *
+ * Each object in the returned array contains:
+ * - path: A string representing the error path, constructed by joining individual path segments with a dot.
+ * - message: A human-readable error message.
+ *
+ * @param error - The ZodError instance to transform.
+ * @returns An array of objects, each representing a single validation issue with a formatted path and message.
+ */
+export function transformZodErrors(error: z.ZodError) {
+  return error.issues.map(issue => ({
+    path: issue.path.join("."),
+    message: issue.message,
+  }));
+}

@@ -1,12 +1,12 @@
 "use client";
 import { InvoiceSnackbar } from "@/components/ui/invoice-snackbar";
-import { useInvoices } from "@/hooks/use-invoices";
 import { type InvoiceSchema, invoiceSchema } from "@/lib/schemas";
 import { generateInvoiceNumber } from "@/lib/utils";
+import { submitForm } from "@/server/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Add } from "@mui/icons-material";
 import {
   Button,
+  CircularProgress,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
 type InvoiceFormProps =
@@ -33,7 +33,6 @@ type InvoiceFormProps =
 
 export const InvoiceForm = (props: InvoiceFormProps) => {
   const { mode } = props;
-  const { isLoading, addInvoice, updateInvoice } = useInvoices();
   const [invoiceNumber, setInvoiceNumber] = useState(generateInvoiceNumber());
   const {
     reset,
@@ -44,32 +43,37 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
   } = useForm<InvoiceSchema>({
     resolver: zodResolver(invoiceSchema),
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
   const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
 
-  const onSubmit = (data: InvoiceSchema) => {
-    if (mode === "add") {
-      addInvoice(data)
-        .then(() => {
-          setIsSuccessSnackbarOpen(true);
-          reset();
-          setInvoiceNumber(generateInvoiceNumber());
-        })
-        .catch(error => {
-          setIsErrorSnackbarOpen(true);
-          console.error("Error adding invoice:", error);
-        });
-    } else {
-      updateInvoice(data)
-        .then(() => {
-          setIsSuccessSnackbarOpen(true);
-          reset();
-          setInvoiceNumber(generateInvoiceNumber());
-        })
-        .catch(error => {
-          setIsErrorSnackbarOpen(true);
-          console.error("Error updating invoice:", error);
-        });
+  const onSubmitForm: SubmitHandler<InvoiceSchema> = async data => {
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("number", data.number);
+    formData.append("dueDate", data.dueDate);
+    formData.append("amount", data.amount);
+    formData.append("status", data.status);
+
+    const { data: success, errors } = await submitForm(formData, mode);
+
+    if (errors) {
+      if (mode === "add") {
+        console.error("Error adding invoice:", errors);
+      } else {
+        console.error("Error updating invoice:", errors);
+      }
+      setIsErrorSnackbarOpen(true);
+      setIsLoading(false);
+      return;
+    }
+
+    if (success) {
+      setIsSuccessSnackbarOpen(true);
+      reset();
+      setInvoiceNumber(generateInvoiceNumber());
+      setIsLoading(false);
     }
   };
 
@@ -87,7 +91,7 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitForm)}>
         <Grid container columnSpacing="35px" rowSpacing="18px">
           <Grid size={{ xs: 12, md: 6 }}>
             <FormControl error={Boolean(errors.name)} fullWidth>
@@ -228,10 +232,10 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
               variant="contained"
               color="primary"
               size="large"
-              startIcon={<Add />}
+              startIcon={isLoading ? <CircularProgress size={24} /> : null}
               disabled={isLoading}
             >
-              {isLoading ? "Adding..." : "Add Invoice"}
+              {mode === "add" ? "Add Invoice" : "Update Invoice"}
             </Button>
           </Grid>
         </Grid>

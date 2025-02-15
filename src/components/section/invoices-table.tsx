@@ -37,7 +37,7 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
         <TableBody>
           {invoices.map(invoice => (
             <TableRow
-              key={invoice.number}
+              key={invoice.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -56,7 +56,7 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
               <TableCell align="center">
                 <StatusChip status={invoice.status} />
               </TableCell>
-              <TableCell align="center">{invoice.amount}</TableCell>
+              <TableCell align="center">Rp {invoice.amount}</TableCell>
               <TableCell align="center">
                 <TableMenu
                   onUpdate={() =>
