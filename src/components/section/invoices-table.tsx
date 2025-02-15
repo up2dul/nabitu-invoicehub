@@ -3,6 +3,7 @@ import { StatusChip } from "@/components/ui/status-chip";
 import { TableMenu } from "@/components/ui/table-menu";
 import type { InvoiceSchema } from "@/lib/schemas";
 import { dateToReadable } from "@/lib/utils";
+import { deleteInvoice } from "@/server/actions";
 import {
   Paper,
   Table,
@@ -62,7 +63,7 @@ export const InvoicesTable = ({ invoices }: InvoicesTableProps) => {
                   onUpdate={() =>
                     router.push(`/invoices/update/${invoice.number}`)
                   }
-                  onDelete={() => console.log(invoice.number)}
+                  onDelete={() => deleteInvoice(invoice.number)}
                 />
               </TableCell>
             </TableRow>
