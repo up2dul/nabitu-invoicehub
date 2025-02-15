@@ -17,6 +17,7 @@
     - [5. Run the database migration](#5-run-the-database-migration)
   - [Usage](#usage)
     - [Start the development server](#start-the-development-server)
+  - [Project Structure](#project-structure)
 
 ## Technologies
 Some of the technologies used in this project:
@@ -84,3 +85,41 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Structure
+```
+.
+└── src/
+    ├── app/
+    │   ├── invoices/
+    │   │   ├── add/
+    │   │   │   └── page.tsx
+    │   │   ├── list/
+    │   │   │   └── page.tsx
+    │   │   ├── update/[slug]/
+    │   │   │   └── page.tsx
+    │   │   └── layout.tsx
+    │   ├── layout.tsx
+    │   ├── not-found.tsx
+    │   └── ...
+    ├── components/
+    │   ├── layout/
+    │   ├── section/
+    │   └── ui/
+    ├── drizzle/
+    │   ├── db.ts
+    │   ├── migrate.ts
+    │   ├── relations.ts
+    │   └── schema.ts
+    ├── hooks/
+    │   └── use-debounce.ts
+    ├── lib/
+    │   ├── constants.ts
+    │   ├── schemas.ts
+    │   └── utils.ts
+    ├── server/
+    │   ├── actions.ts
+    │   └── theme.ts
+    ├── middleware.ts
+    └── theme.ts
+```
