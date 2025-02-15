@@ -51,7 +51,7 @@ export async function addInvoice(newData: InferInvoice) {
 }
 
 export async function updateInvoice(updatedData: InferInvoice) {
-  await db
+  return await db
     .update(invoices)
     .set(updatedData)
     .where(eq(invoices.number, updatedData.number));
